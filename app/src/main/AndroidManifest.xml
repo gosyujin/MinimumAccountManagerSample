@@ -15,6 +15,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- アカウント追加画面で表示するダイアログのActivity -->
+        <activity android:name=".AuthenticationActivity"
+            android:theme="@android:style/Theme.Dialog"
+            android:excludeFromRecents="true" />
+
+        <!-- サービスの定義 -->
+        <service android:name=".AuthenticationService" android:exported="true">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+            <meta-data android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator" />
+        </service>
     </application>
+
+    <!-- 必要になるパーミッション -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
 
 </manifest>
